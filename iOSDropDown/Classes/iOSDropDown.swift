@@ -21,6 +21,7 @@ open class DropDown: UITextField {
     @IBInspectable public var itemsColor: UIColor = .darkGray
     @IBInspectable public var itemsTintColor: UIColor = .blue
     @IBInspectable public var selectedRowColor: UIColor = .systemPink
+    @IBInspectable public var selectedRowTextColor: UIColor = .black
     @IBInspectable public var hideOptionsWhenSelect = true
     @IBInspectable public var isSearchEnable: Bool = true {
         didSet {
@@ -404,15 +405,16 @@ extension DropDown: UITableViewDataSource {
 
         if indexPath.row != selectedIndex {
             cell!.backgroundColor = rowBackgroundColor
+            cell!.textLabel!.textColor = itemsColor
         } else {
             cell?.backgroundColor = selectedRowColor
+            cell!.textLabel!.textColor = selectedRowTextColor
         }
 
         if imageArray.count > indexPath.row {
             cell!.imageView!.image = UIImage(named: imageArray[indexPath.row])
         }
         cell!.textLabel!.text = "\(dataArray[indexPath.row])"
-        cell!.textLabel!.textColor = itemsColor
         cell!.tintColor = itemsTintColor
         cell!.accessoryType = (indexPath.row == selectedIndex) && checkMarkEnabled ? .checkmark : .none
         cell!.selectionStyle = .none
